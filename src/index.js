@@ -1,22 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './components/App/App.js';
-import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+import { takeEvery, put } from 'redux-saga/effects';
+import axios from 'axios';
+
+const sagaMiddleware = createSagaMiddleware();
 
 // Create the rootSaga generator function
-function* rootSaga() {
-
+function* sagaFBIAgent() {
+    yield takeEvery('FETCH_MOVIES', fetchMovies);
+    // yield takeEvery(),
+    // yield takeEvery()
 }
 
-// Create sagaMiddleware
-const sagaMiddleware = createSagaMiddleware();
+
+
+function* fetchMovies() {
+  
+    let movieArray = [];
+    yield axios({
+        method: 'GET',
+        url: '/movies'
+    }).then((response) => {
+        movieArray = response.data
+        console.log('in fetchMovies logging response.data', movieArray);
+    }).catch((error) => {
+        alert("unable to get movies in fetchMovies", error);
+    })
+    yield put({
+        type: 'SET_MOVIES',
+        payload: movieArray
+    })
+}
+
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -32,7 +54,7 @@ const movies = (state = [], action) => {
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
-            return action.payload;
+            return state = action.payload;
         default:
             return state;
     }
@@ -49,8 +71,7 @@ const storeInstance = createStore(
 );
 
 // Pass rootSaga into our sagaMiddleware
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(sagaFBIAgent);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
     document.getElementById('root'));
-registerServiceWorker();
