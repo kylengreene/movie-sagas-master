@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Details from '../Details/Details'
 
 class MovieListItem extends Component {
-    state = {
-        history: ''
-    };
+    
     goToDetails = (event, movie) => {
         let movieToSend = {
             id: this.props.movie.id,
@@ -22,6 +21,7 @@ class MovieListItem extends Component {
             type: 'FIRE_DESCRIPTION',
             payload: movieToSend
         })
+        this.props.history.push('/details')
     }
 
     render() {
@@ -45,4 +45,4 @@ const putReduxStateOnProps = (reduxState) => ({
     reduxState
 });
 
-export default connect(putReduxStateOnProps)(MovieListItem);
+export default withRouter(connect(putReduxStateOnProps)(MovieListItem));

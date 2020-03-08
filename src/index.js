@@ -17,7 +17,8 @@ const sagaMiddleware = createSagaMiddleware();
 function* sagaFBIAgent() {
     yield takeEvery('FETCH_MOVIES', fetchMovies);
     yield takeEvery('FIRE_GENRE', genreMachine);
-    yield takeEvery('FIRE_DESCRIPTION', descriptionMachine)
+    yield takeEvery('FIRE_DESCRIPTION', descriptionMachine);
+    yield takeEvery('NEW_DESCRIPTION', editMachine);
 }
 
 
@@ -67,6 +68,12 @@ function* descriptionMachine(action) {
         type: 'SET_DESCRIPTION',
         payload: description
     })
+}
+
+function* editMachine(action){
+    yield console.log('logging payload from editMachine', action.payload);
+    
+
 }
 // Used to store movies returned from the server
 const movies = (state = [], action) => {

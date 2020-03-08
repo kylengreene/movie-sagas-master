@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import MovieListItem from '../MovieListItem/MovieListItem'
 
 class Movies extends Component {
@@ -30,8 +31,8 @@ class Movies extends Component {
     }
 }
 
-const mapReduxStateToProps = (reduxState) => ({
+const putReduxStateOnProps = (reduxState) => ({
     reduxState
 });
 
-export default connect(mapReduxStateToProps)(Movies);
+export default withRouter(connect(putReduxStateOnProps)(Movies));
