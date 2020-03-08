@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM movies  `
+    let queryText = `SELECT * FROM movies `
     pool.query(queryText).then(results => {
         res.send(results.rows);
         console.log('logging favrite row in router', results.rows);
@@ -14,13 +14,6 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
     })
 });
-
-
-
-
-
-
-
 
 
 module.exports = router;

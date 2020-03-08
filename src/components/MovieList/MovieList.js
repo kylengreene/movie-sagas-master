@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MovieListItem from '../MovieListItem/MovieListItem'
 
-class MovieList extends Component {
+class Movies extends Component {
 
 
     componentDidMount = () => {
@@ -34,4 +34,4 @@ const mapReduxStateToProps = (reduxState) => ({
     reduxState
 });
 
-export default connect(mapReduxStateToProps)(MovieList);
+export default connect(mapReduxStateToProps)(Movies);
