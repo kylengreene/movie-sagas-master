@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     let queryText = `SELECT * FROM movies `
     pool.query(queryText).then(results => {
         res.send(results.rows);
-        console.log('logging favrite row in router', results.rows);
+       
 
     }).catch(error => {
         console.log('error getting gifs', error);
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 });
 
 router.put('/', (req, res) => {
-    console.log('logging body', req.body);
+    console.log('req.body.description fro put', req.body.description);
 
     let queryString = `UPDATE movies SET description='${req.body.description}' WHERE id=${req.body.id};`
     pool.query(queryString).then((results) => {

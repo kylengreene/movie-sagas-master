@@ -18,7 +18,7 @@ class Movies extends Component {
     render() {
         return (
             <div>
-                <h1>Movies</h1><br />
+                <h1>Movies</h1>
                 <ul className="List">
                     {this.props.reduxState.movies.map((movie) => {
                         return (

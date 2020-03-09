@@ -18,7 +18,8 @@ function* sagaFBIAgent() {
     yield takeEvery('FETCH_MOVIES', fetchMovies);
     yield takeEvery('FIRE_GENRE', genreMachine);
     yield takeEvery('FIRE_DESCRIPTION', descriptionMachine);
-    yield takeEvery('NEW_DESCRIPTION', editMachine);
+    yield takeEvery('NEW_GENRE', editGenreMachine);
+    yield takeEvery('NEW_DESCRIPTION', editDescriptionMachine);
 }
 
 
@@ -71,7 +72,7 @@ function* descriptionMachine(action) {
     })
 }
 
-function* editMachine(action){
+function* editGenreMachine(action){
     yield console.log('logging payload from editMachine', action.payload);
     yield axios({
         method: 'PUT',
@@ -88,6 +89,28 @@ function* editMachine(action){
         alert("unable to PUT details in editMachine", error);
     })
     
+    yield put({
+        type: 'FETCH_MOVIES'
+    })
+}
+
+function* editDescriptionMachine(action) {
+    yield console.log('logging payload from editMachine', action.payload);
+    yield axios({
+        method: 'PUT',
+        url: '/details',
+        data: action.payload
+    }).catch((error) => {
+        alert("unable to PUT genre in editMachine", error);
+    })
+    yield axios({
+        method: 'PUT',
+        url: '/movies',
+        data: action.payload
+    }).catch((error) => {
+        alert("unable to PUT details in editMachine", error);
+    })
+
     yield put({
         type: 'FETCH_MOVIES'
     })

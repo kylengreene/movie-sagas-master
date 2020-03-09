@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 
 class Details extends Component {
+    
 
     backToMovies = () => {
         this.props.history.push('/')
@@ -19,7 +20,10 @@ class Details extends Component {
                     return (genre.name)
                 })} </h1><br />
                 <img alt="selected movie poster" src={this.props.reduxState.description[0].poster} />
-                <h3>{this.props.reduxState.description[0].description}</h3>
+
+                <div class="description">
+                <h3 class>{this.props.reduxState.description[0].description}</h3>
+                </div>
                 <button onClick={this.backToMovies}>Back to Movies</button>
                 <button onClick={this.edit}>Edit Movie Information</button>
             </div>

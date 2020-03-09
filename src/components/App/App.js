@@ -5,8 +5,7 @@ import Movies from '../MovieList/MovieList';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import Details from '../Details/Details'
 import Edit from '../Edit/Edit'
-
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   // Renders the entire app on the DOM

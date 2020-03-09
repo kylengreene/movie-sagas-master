@@ -29,9 +29,11 @@ class MovieListItem extends Component {
             <div>
                 <Router>
                     <li key={this.props.movie.movie_id} className="listItem">
+                    
                         <button onClick={(event) => this.goToDetails(event)}><img alt='movie poster' className="image" src={this.props.movie.poster} /></button>
-                        <span>{this.props.movie.title}</span>
-                        <span>{this.props.movie.description}</span>
+                
+                        
+                        <p>{this.props.movie.title}</p>
                         <span>{this.props.movie.genre}</span>
                     </li>
                     <Route path='/Details' Component={Details} />
