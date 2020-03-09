@@ -60,6 +60,7 @@ function* genreMachine(action) {
 function* descriptionMachine(action) {
     let description = [
         {
+            id: action.payload.id,
             description: action.payload.description,
             poster: action.payload.url
         }
@@ -72,8 +73,24 @@ function* descriptionMachine(action) {
 
 function* editMachine(action){
     yield console.log('logging payload from editMachine', action.payload);
+    yield axios({
+        method: 'PUT',
+        url: '/details',
+        data: action.payload
+    }).catch((error) => {
+        alert("unable to PUT genre in editMachine", error);
+    })
+    yield axios({
+        method: 'PUT',
+        url: '/movies',
+        data: action.payload
+    }).catch((error) => {
+        alert("unable to PUT details in editMachine", error);
+    })
     
-
+    yield put({
+        type: 'FETCH_MOVIES'
+    })
 }
 // Used to store movies returned from the server
 const movies = (state = [], action) => {

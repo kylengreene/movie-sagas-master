@@ -6,8 +6,9 @@ import { withRouter } from 'react-router-dom';
 class Edit extends Component {
     state = {
         editInput: {
+            id: this.props.reduxState.description[0].id,
             genres: '',
-            desciption: ''
+            description: ''
         }
     }
 
@@ -27,7 +28,8 @@ class Edit extends Component {
             type: 'NEW_DESCRIPTION',
             payload: this.state.editInput
         })
-        // this.props.history.push('/checkout');
+
+        this.props.history.push('/');
     }
 
     cancel = () => {
@@ -37,10 +39,26 @@ class Edit extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input placeholder='Genre' value={this.state.editInput.genres}
-                        onChange={(event) => this.handleChangeFor('genres', event)}></input>
+                    <p>Add Genre or Edit Description</p>
+                    <select onChange={(event) => this.handleChangeFor('genres', event)}  id="genres" name= "Add Genre">
+                        <option value= '1'>Adventure</option>
+                        <option value='2'>Animated</option>
+                        <option value='3'>Biographical</option>
+                        <option value='4'>Comedy</option>
+                        <option value='5'>Disaster</option>
+                        <option value='6'>Drama</option>
+                        <option value='7'>Epic</option>
+                        <option value='8'>Fantasy</option>
+                        <option value='9'>Musical</option>
+                        <option value='10'>Romantic</option>
+                        <option value='11'>Science Fiction</option>
+                        <option value='12'>Space-Opera</option>
+                        <option value='13'>Superhero</option>
+                    </select>
+                    {/* <input placeholder='Genre' value={this.state.editInput.genres}
+                        onChange={(event) => this.handleChangeFor('genres', event)}></input> */}
                     <input placeholder='Description' value={this.state.editInput.description}
-                        onChange={(event) => this.handleChangeFor('desciption', event)}></input>
+                        onChange={(event) => this.handleChangeFor('description', event)}></input>
                     <button type="submit">
                         Submit
           </button>

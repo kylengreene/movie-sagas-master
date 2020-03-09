@@ -15,5 +15,16 @@ router.get('/', (req, res) => {
     })
 });
 
+router.put('/', (req, res) => {
+    console.log('logging body', req.body);
+
+    let queryString = `UPDATE movies SET description='${req.body.description}' WHERE id=${req.body.id};`
+    pool.query(queryString).then((results) => {
+        res.sendStatus(200);
+    }).catch((err) => {
+        res.sendStatus(500);
+        console.log(err);
+    })
+});
 
 module.exports = router;
